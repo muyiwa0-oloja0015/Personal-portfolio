@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Aquarium Project" />
+        <meta name="author" content="Muyiwa Oloja Moses" />
+        <title>Aquarium</title>
+        <link rel="icon" type="image/x-icon" href="https://via.placeholder.com/16" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            body {
+                margin: 0;
+            }
+
+            #aquarium {
+                position: relative;
+                width: 100vw;
+                height: 100vh;
+                background: url('/assets/bg-3.jpg') no-repeat center center / cover;
+                overflow: hidden;
+            }
+
+            .animal, .static-object {
+                position: absolute;
+            }
+
+            .fish-1 {
+                width: 50px;
+                height: auto;
+                animation: swim 12s infinite linear;
+            }
+            .fish-2 {
+                width: 50px;
+                height: auto;
+                animation: swim 8s infinite linear;
+            }
+            .fish-3 {
+                width: 50px;
+                height: auto;
+                animation: swim 5s infinite linear;
+            }
+
+            .octopus {
+                width: 70px;
+                height: auto;
+                animation: moveUp 10s infinite;
+            }
+            .turtle {
+                width: 70px;
+                height: auto;
+                animation: moveUp 18s infinite;
+            }
+            .starfish {
+                width: 70px;
+                height: auto;
+                animation: moveUp 11s infinite;
+            }
+
+            @keyframes swim {
+                from {
+                    transform: translateX(0);
+                }
+                to {
+                    transform: translateX(100vw);
+                }
+            }
+
+            @keyframes moveUp {
+                from {
+                    bottom: 0;
+                }
+                to {
+                    bottom: 100vh;
+                }
+            }
+        </style>
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">    
+          
+
+            <div id="aquarium">
+                <!-- Static Objects -->
+                <img src="/assets/coral.png" class="static-object" style="bottom: 10px; left: 50px; width: 100px;" alt="Coral">
+                <img src="/assets/rock.png" class="static-object" style="bottom: 20px; right: 100px; width: 120px;" alt="Rock">
+
+                <!-- Animals -->
+                <img src="/assets/fish-1.png" class="animal fish-1" style="top: 50px; left: 0;" alt="Fish 1">
+                <img src="/assets/fish-2.png" class="animal fish-2" style="top: 150px; left: 0;" alt="Fish 2">
+                <img src="/assets/fish-3.png" class="animal fish-3" style="top: 250px; left: 0;" alt="Fish 3">
+                <img src="/assets/octopus.png" class="animal octopus" style="left: 300px; bottom: 0;" alt="Octopus">
+                <img src="/assets/starfish.png" class="animal starfish" style="bottom: 60px; left: 400px; width: 40px;" alt="Seahorse">
+                <img src="/assets/turtle.png" class="animal turtle" style="bottom: 80px; right: 200px; width: 70px;" alt="Turtle">
+            </div>
+
+         
+        </main>
+
+        <footer class="bg-white py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0">Copyright &copy; Your Website 2023</div></div>
+                </div>
+            </div>
+        </footer>
+
+        <audio id="backgroundSound" loop>
+            <source src="https://www.soundjay.com/nature/ocean-wave-1.mp3" type="audio/mpeg">
+        </audio>
+
+        <script>
+            const backgrounds = [
+                '/assets/bg-1.jpg',
+                '/assets/bg-2.jpg',
+                '/assets/bg-3.jpg',
+            ];
+
+            const sounds = [
+                'https://www.soundjay.com/nature/ocean-wave-1.mp3',
+                'https://www.soundjay.com/nature/ocean-wave-2.mp3',
+                'https://www.soundjay.com/nature/rain-01.mp3'
+            ];
+
+          
+            let currentBgIndex = 0;
+            let currentSoundIndex = 0;
+
+            function changeBg() {
+                const aquarium = document.getElementById('aquarium');
+                currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
+                aquarium.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
+            }
+
+            function changeSound() {
+                const audio = document.getElementById('backgroundSound');
+                currentSoundIndex = (currentSoundIndex + 1) % sounds.length;
+                audio.src = sounds[currentSoundIndex];
+                audio.play();
+            }
+
+            // Automatically change background and sound every 10 seconds
+            setInterval(() => {
+                changeBg();
+                changeSound();
+            }, 10000);
+
+            // Start playing the initial sound
+            window.onload = () => {
+                document.getElementById('backgroundSound').play();
+            };
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
